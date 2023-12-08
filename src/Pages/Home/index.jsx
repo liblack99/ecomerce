@@ -5,9 +5,17 @@ import CardProducts from "../../Component/CardProducts";
 import Layout from "../../Component/Layout";
 import Search from "../../Component/Search";
 import { ShoppingCartContext } from "../../Context";
+import ProductDetail from "../../Component/ProductDetails";
 
 function Home() {
-  const { products, handleSearch } = useContext(ShoppingCartContext);
+  const {
+    products,
+    handleSearch,
+    showDetailProduct,
+    closeProductDetail,
+    productToShow,
+    isProductDetailOpen,
+  } = useContext(ShoppingCartContext);
   return (
     <Layout>
       <div className="flex items-center justify-center relative w-80 mb-4">
@@ -16,9 +24,19 @@ function Home() {
       <Search handleSearch={handleSearch} />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg mt-4">
         {products?.map((product) => (
-          <CardProducts key={product.id} data={product} />
+          <CardProducts
+            key={product.id}
+            data={product}
+            showDetailProduct={showDetailProduct}
+          />
         ))}
       </div>
+      {isProductDetailOpen && (
+        <ProductDetail
+          productToShow={productToShow}
+          closeProductDetail={closeProductDetail}
+        />
+      )}
     </Layout>
   );
 }

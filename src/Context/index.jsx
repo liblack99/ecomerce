@@ -5,13 +5,20 @@ const ShoppingCartContext = createContext();
 
 function ShoppingCartProvider({ children }) {
   // My account
+  const [products, handleSearch] = useProducts();
   const [account, setAccount] = useState({});
 
-  const [products, handleSearch] = useProducts();
+  // Product Detail · Show product
+  const [productToShow, setProductToShow] = useState({});
 
-  // Sign out
-  const [signOut, setSignOut] = useState(false);
-
+  const showDetailProduct = (productDetail) => {
+    openProductDetail();
+    setProductToShow(productDetail);
+  };
+  // Product Detail · Open/Close
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+  const openProductDetail = () => setIsProductDetailOpen(true);
+  const closeProductDetail = () => setIsProductDetailOpen(false);
   // Shopping Cart · Increment quantity
   const [count, setCount] = useState(0);
 
@@ -19,18 +26,10 @@ function ShoppingCartProvider({ children }) {
     setAccount(count + 1);
   };
 
-  // Product Detail · Open/Close
-  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
-  const openProductDetail = () => setIsProductDetailOpen(true);
-  const closeProductDetail = () => setIsProductDetailOpen(false);
-
   // Checkout Side Menu · Open/Close
   const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
   const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true);
   const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
-
-  // Product Detail · Show product
-  const [productToShow, setProductToShow] = useState({});
 
   // Shopping Cart · Add products to cart
   const [cartProducts, setCartProducts] = useState([]);
@@ -54,13 +53,14 @@ function ShoppingCartProvider({ children }) {
         count,
         products,
         handleSearch,
+        productToShow,
+        showDetailProduct,
+        closeProductDetail,
 
         productsQuantity,
-        openProductDetail,
-        closeProductDetail,
+
         isProductDetailOpen,
-        productToShow,
-        setProductToShow,
+
         cartProducts,
         setCartProducts,
         isCheckoutSideMenuOpen,
@@ -77,8 +77,6 @@ function ShoppingCartProvider({ children }) {
         setSearchByCategory,
         account,
         setAccount,
-        signOut,
-        setSignOut,
       }}>
       {children}
     </ShoppingCartContext.Provider>

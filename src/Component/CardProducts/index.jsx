@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
-function CardProducts({ data }) {
+function CardProducts({ data, showDetailProduct }) {
   const renderIcon = (id) => {
     const isInCart = false;
     //   context.cartProducts.filter((product) => product.id === id).length > 0;
 
     if (isInCart) {
       return (
-        <div className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1">
+        <div className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1 hover">
           <CheckIcon className="h-6 w-6 text-white"></CheckIcon>
         </div>
       );
@@ -23,7 +23,9 @@ function CardProducts({ data }) {
   return (
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg relative shadow-sm">
       {renderIcon(data.id)}
-      <figure className="mb-2 w-full h-4/5">
+      <figure
+        className="mb-2 w-full h-4/5"
+        onClick={() => showDetailProduct(data)}>
         <img
           className="w-full h-full object-cover rounded-lg"
           src={data.images}
