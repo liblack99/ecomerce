@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { XMarkIcon } from "@heroicons/react/24/solid";
-import { useContext } from "react";
-import { ShoppingCartContext } from "../../Context";
+import {Link} from "react-router-dom";
+import {XMarkIcon} from "@heroicons/react/24/solid";
+import {useContext} from "react";
+import {ShoppingCartContext} from "../../Context";
 import OrderCard from "../OrderCard";
 
 function CheckoutMenu() {
@@ -11,6 +11,8 @@ function CheckoutMenu() {
     clearCheckoutMenu,
     closeCheckoutMenu,
     totalPriceToCart,
+    increaseQuantity,
+    decreaseQuantity,
   } = useContext(ShoppingCartContext);
 
   return (
@@ -20,7 +22,8 @@ function CheckoutMenu() {
         <div>
           <XMarkIcon
             className="h-6 w-6 text-black cursor-pointer "
-            onClick={() => closeCheckoutMenu()}></XMarkIcon>
+            onClick={() => closeCheckoutMenu()}
+          ></XMarkIcon>
         </div>
       </div>
       <div className="px-2">
@@ -29,6 +32,8 @@ function CheckoutMenu() {
             key={product.id}
             product={product}
             deleteProductsToCart={deleteProductsToCart}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
           />
         ))}
       </div>
@@ -39,10 +44,11 @@ function CheckoutMenu() {
             ${totalPriceToCart(cartProducts)}
           </span>
         </p>
-        <Link to="/my-order">
+        <Link to="/my-order/last">
           <button
             className="bg-black py-3 text-white w-[400px] rounded-lg fixed bottom-5"
-            onClick={() => clearCheckoutMenu()}>
+            onClick={() => clearCheckoutMenu()}
+          >
             Checkout
           </button>
         </Link>

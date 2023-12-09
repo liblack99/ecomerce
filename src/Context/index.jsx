@@ -1,9 +1,9 @@
-import { createContext, useState } from "react";
+import {createContext, useState} from "react";
 import useProducts from "../Hooks/useProducts";
 
 const ShoppingCartContext = createContext();
 
-function ShoppingCartProvider({ children }) {
+function ShoppingCartProvider({children}) {
   // My account
   const [products, handleSearch] = useProducts();
   const [account, setAccount] = useState({});
@@ -17,12 +17,16 @@ function ShoppingCartProvider({ children }) {
   };
   // Product Detail · Open/Close
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
-  const openProductDetail = () => setIsProductDetailOpen(true);
+  const openProductDetail = () => {
+    setIsProductDetailOpen(true), closeCheckoutMenu();
+  };
   const closeProductDetail = () => setIsProductDetailOpen(false);
 
   // Checkout Side Menu · Open/Close
   const [isCheckoutMenuOpen, setIsCheckoutMenuOpen] = useState(false);
-  const openCheckoutMenu = () => setIsCheckoutMenuOpen(true);
+  const openCheckoutMenu = () => {
+    setIsCheckoutMenuOpen(true), closeProductDetail();
+  };
   const closeCheckoutMenu = () => setIsCheckoutMenuOpen(false);
 
   // Shopping Cart · Add products to cart
@@ -30,7 +34,7 @@ function ShoppingCartProvider({ children }) {
   const [count, setCount] = useState(cartProducts.length);
 
   const addProductsToCart = (product) => {
-    const newProduct = { ...product, quantity: 1 };
+    const newProduct = {...product, quantity: 1};
     setCartProducts([...cartProducts, newProduct]);
     openCheckoutMenu();
     closeProductDetail();
@@ -39,11 +43,28 @@ function ShoppingCartProvider({ children }) {
   const deleteProductsToCart = (id) => {
     const filteredProducts = cartProducts.filter((product) => product.id != id);
     setCartProducts(filteredProducts);
-    setAccount(count - 1);
+    setCount(count - 1);
+  };
+  const decreaseQuantity = (id) => {
+    const index = cartProducts.findIndex((product) => product.id === id);
+    if (index !== -1 && cartProducts[index].quantity > 1) {
+      const updatedCartProducts = [...cartProducts];
+      updatedCartProducts[index].quantity = cartProducts[index].quantity - 1;
+      setCartProducts(updatedCartProducts);
+    }
+  };
+
+  const increaseQuantity = (id) => {
+    const index = cartProducts.findIndex((product) => product.id === id);
+    if (index !== -1) {
+      const updatedCartProducts = [...cartProducts];
+      updatedCartProducts[index].quantity = cartProducts[index].quantity + 1;
+      setCartProducts(updatedCartProducts);
+    }
   };
   const clearCheckoutMenu = () => {
     const orderToAdd = {
-      Id: Date.now(),
+      id: Date.now(),
       date: new Date().toLocaleDateString("es-CO"),
       products: cartProducts,
       totalProducts: cartProducts.length,
@@ -51,7 +72,7 @@ function ShoppingCartProvider({ children }) {
     };
 
     setCount(0);
-    setOrder([...order, orderToAdd]);
+    setOrders([...orders, orderToAdd]);
     setCartProducts([]);
   };
 
@@ -63,7 +84,7 @@ function ShoppingCartProvider({ children }) {
     return total;
   };
   // Shopping Cart · Order
-  const [order, setOrder] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   // Get products
   const [items, setItems] = useState(null);
@@ -94,9 +115,10 @@ function ShoppingCartProvider({ children }) {
         openCheckoutMenu,
         closeCheckoutMenu,
         totalPriceToCart,
+        increaseQuantity,
+        decreaseQuantity,
+        orders,
 
-        order,
-        setOrder,
         items,
         setItems,
         searchByTitle,
@@ -106,9 +128,10 @@ function ShoppingCartProvider({ children }) {
         setSearchByCategory,
         account,
         setAccount,
-      }}>
+      }}
+    >
       {children}
     </ShoppingCartContext.Provider>
   );
 }
-export { ShoppingCartContext, ShoppingCartProvider };
+export {ShoppingCartContext, ShoppingCartProvider};

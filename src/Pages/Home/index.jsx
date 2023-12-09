@@ -24,7 +24,7 @@ function Home() {
         <h1 className="font-medium text-xl">Exclusive Products</h1>
       </div>
       <Search handleSearch={handleSearch} />
-      <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg mt-4">
+      <div className="grid place-content-center grid-cols-[repeat(auto-fill,minmax(230px,1fr))] w-[90%] mt-4">
         {products?.map((product) => (
           <CardProducts
             key={product.id}
