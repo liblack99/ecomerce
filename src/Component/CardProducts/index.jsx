@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
-function CardProducts({ data, showDetailProduct }) {
+import { ShoppingCartContext } from "../../Context";
+
+function CardProducts({ data, showDetailProduct, addProductsToCart }) {
+  const { cartProducts } = useContext(ShoppingCartContext);
   const renderIcon = (id) => {
-    const isInCart = false;
-    //   context.cartProducts.filter((product) => product.id === id).length > 0;
+    const isInCart = cartProducts.some((product) => product.id === id);
 
     if (isInCart) {
       return (
@@ -13,7 +15,9 @@ function CardProducts({ data, showDetailProduct }) {
       );
     } else {
       return (
-        <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1">
+        <div
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+          onClick={() => addProductsToCart(data)}>
           <PlusIcon className="h-6 w-6 text-black"></PlusIcon>
         </div>
       );

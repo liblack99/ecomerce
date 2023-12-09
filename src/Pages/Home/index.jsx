@@ -15,7 +15,9 @@ function Home() {
     closeProductDetail,
     productToShow,
     isProductDetailOpen,
+    addProductsToCart,
   } = useContext(ShoppingCartContext);
+
   return (
     <Layout>
       <div className="flex items-center justify-center relative w-80 mb-4">
@@ -28,6 +30,7 @@ function Home() {
             key={product.id}
             data={product}
             showDetailProduct={showDetailProduct}
+            addProductsToCart={addProductsToCart}
           />
         ))}
       </div>
