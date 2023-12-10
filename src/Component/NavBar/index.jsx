@@ -5,14 +5,14 @@ import ShoppingCart from "../ShoppingCart";
 
 const Navbar = () => {
   const activeStyle = "underline underline-offset-4";
-  const { login, filterByCategories, handleLogin } =
+  const { account, login, filterByCategories, handleLogin } =
     useContext(ShoppingCartContext);
 
   const renderView = () => {
     if (login) {
       return (
         <>
-          <li className="text-black/60">"example"</li>
+          <li className="text-black/60">{account.email}</li>
           <li>
             <NavLink
               to="/my-orders"
