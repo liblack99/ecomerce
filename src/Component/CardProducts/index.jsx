@@ -10,7 +10,7 @@ function CardProducts({ data, showDetailProduct, addProductsToCart }) {
     if (isInCart) {
       return (
         <div className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1 hover">
-          <CheckIcon className="h-6 w-6 text-white"></CheckIcon>
+          <CheckIcon className="h-6 w-6 text-white "></CheckIcon>
         </div>
       );
     } else {
@@ -18,14 +18,14 @@ function CardProducts({ data, showDetailProduct, addProductsToCart }) {
         <div
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
           onClick={() => addProductsToCart(data)}>
-          <PlusIcon className="h-6 w-6 text-black"></PlusIcon>
+          <PlusIcon className="h-6 w-6 text-black hover:scale-[1.3] color-black"></PlusIcon>
         </div>
       );
     }
   };
 
   return (
-    <div className="bg-white cursor-pointer w-56 h-60 rounded-lg relative shadow-sm">
+    <div className="bg-gray-200 cursor-pointer w-56 h-60 rounded-lg relative shadow-md mb-2">
       {renderIcon(data.id)}
       <figure
         className="mb-2 w-full h-4/5"

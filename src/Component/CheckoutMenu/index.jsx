@@ -1,7 +1,7 @@
-import {Link} from "react-router-dom";
-import {XMarkIcon} from "@heroicons/react/24/solid";
-import {useContext} from "react";
-import {ShoppingCartContext} from "../../Context";
+import { Link } from "react-router-dom";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
 
 function CheckoutMenu() {
@@ -21,9 +21,8 @@ function CheckoutMenu() {
         <h2 className="font-medium text-xl ">My Order</h2>
         <div>
           <XMarkIcon
-            className="h-6 w-6 text-black cursor-pointer "
-            onClick={() => closeCheckoutMenu()}
-          ></XMarkIcon>
+            className="h-6 w-6 text-black cursor-pointer hover:scale-[1.2]"
+            onClick={() => closeCheckoutMenu()}></XMarkIcon>
         </div>
       </div>
       <div className="px-2">
@@ -46,9 +45,8 @@ function CheckoutMenu() {
         </p>
         <Link to="/my-order/last">
           <button
-            className="bg-black py-3 text-white w-[400px] rounded-lg fixed bottom-5"
-            onClick={() => clearCheckoutMenu()}
-          >
+            className="bg-black py-3 text-white w-[400px] rounded-lg fixed bottom-5 hover:scale-[1.01] "
+            onClick={() => clearCheckoutMenu()}>
             Checkout
           </button>
         </Link>

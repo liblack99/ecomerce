@@ -1,11 +1,12 @@
-import {createContext, useState} from "react";
+import { createContext, useState } from "react";
 import useProducts from "../Hooks/useProducts";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
 const ShoppingCartContext = createContext();
 
-function ShoppingCartProvider({children}) {
-  const [products, handleSearch, filterByCategories] = useProducts();
-
+function ShoppingCartProvider({ children }) {
+  const [products, handleSearch, filterByCategories, loading] = useProducts();
+  const { account, saveAccount, login, handleLogin } = useLocalStorage();
   // Product Detail · Show product
   const [productToShow, setProductToShow] = useState({});
   const showDetailProduct = (productDetail) => {
@@ -31,7 +32,7 @@ function ShoppingCartProvider({children}) {
   const [count, setCount] = useState(cartProducts.length);
 
   const addProductsToCart = (product) => {
-    const newProduct = {...product, quantity: 1};
+    const newProduct = { ...product, quantity: 1 };
     setCartProducts([...cartProducts, newProduct]);
     openCheckoutMenu();
     closeProductDetail();
@@ -82,6 +83,10 @@ function ShoppingCartProvider({children}) {
   // Shopping Cart · Order
   const [orders, setOrders] = useState([]);
 
+  const formatPassword = (password) => {
+    return "*".repeat(password.length);
+  };
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -105,10 +110,15 @@ function ShoppingCartProvider({children}) {
         increaseQuantity,
         decreaseQuantity,
         orders,
-      }}
-    >
+        account,
+        saveAccount,
+        login,
+        handleLogin,
+        formatPassword,
+        loading,
+      }}>
       {children}
     </ShoppingCartContext.Provider>
   );
 }
-export {ShoppingCartContext, ShoppingCartProvider};
+export { ShoppingCartContext, ShoppingCartProvider };

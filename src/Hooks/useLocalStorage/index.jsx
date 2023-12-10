@@ -1,27 +1,28 @@
-import {useState} from "react";
-function useLocalStorage(itemName, initialValue) {
+import { useState } from "react";
+
+function useLocalStorage() {
   const getItemFromLocalStorage = (name, defaultValue) => {
     const localStorageItem = localStorage.getItem(name);
     return localStorageItem ? JSON.parse(localStorageItem) : defaultValue;
   };
 
   const [account, setAccount] = useState(() =>
-    getItemFromLocalStorage(itemName, initialValue)
+    getItemFromLocalStorage("account", {})
   );
-  const [signIn, setSignIn] = useState(() =>
-    getItemFromLocalStorage("sign-in", false)
+  const [login, setLogin] = useState(() =>
+    getItemFromLocalStorage("login", false)
   );
 
   const saveAccount = (newItem) => {
-    localStorage.setItem(itemName, JSON.stringify(newItem));
+    localStorage.setItem("account", JSON.stringify(newItem));
     setAccount(newItem);
   };
 
-  const handleSignIn = (newValue) => {
-    localStorage.setItem("sign-in", JSON.stringify(newValue));
-    setSignIn(newValue);
+  const handleLogin = (newValue) => {
+    localStorage.setItem("login", JSON.stringify(newValue));
+    setLogin(newValue);
   };
 
-  return [account, saveAccount, signIn, handleSignIn];
+  return { account, saveAccount, login, handleLogin };
 }
 export default useLocalStorage;

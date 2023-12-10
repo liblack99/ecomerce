@@ -1,15 +1,21 @@
-import {useRef} from "react";
+import { useRef } from "react";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
 
-function EditUserInfo({setView}) {
+function EditUserInfo({ setView }) {
+  const { saveAccount, account } = useContext(ShoppingCartContext);
   const form = useRef(null);
-  //   const editAccount = () => {
-  //     const formData = new FormData(form.current);
-  //     const data = {
-  //       name: formData.get("name"),
-  //       email: formData.get("email"),
-  //       password: formData.get("password"),
-  //     };
-  //   };
+  const editAccount = () => {
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    if (data.name !== "" && data.email !== "" && data.password !== "") {
+      saveAccount(data);
+    }
+  };
 
   return (
     <form ref={form} className="flex flex-col gap-4 w-80">
@@ -21,8 +27,8 @@ function EditUserInfo({setView}) {
           type="text"
           id="name"
           name="name"
-          defaultValue="name"
-          placeholder="Peter"
+          defaultValue={account.name}
+          placeholder="name"
           className="rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
         />
       </div>
@@ -31,10 +37,10 @@ function EditUserInfo({setView}) {
           Your email:
         </label>
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
-          defaultValue="email"
+          defaultValue={account.email}
           placeholder="hi@helloworld.com"
           className="rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
         />
@@ -44,10 +50,9 @@ function EditUserInfo({setView}) {
           Your password:
         </label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
-          defaultValue="password"
           placeholder="******"
           className="rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
         />
@@ -55,9 +60,8 @@ function EditUserInfo({setView}) {
       <button
         className="bg-black text-white w-full rounded-lg py-3"
         onClick={() => {
-          setView("user-info");
-        }}
-      >
+          setView("user-info"), editAccount();
+        }}>
         Edit
       </button>
     </form>

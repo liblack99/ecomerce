@@ -1,11 +1,12 @@
-import {useEffect} from "react";
-import {useState} from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import getData from "../../Services/getData";
 
 function useProducts() {
   const [products, setProducts] = useState([]);
   const [text, setText] = useState("");
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +14,7 @@ function useProducts() {
         const apiData = await getData(text);
         setProducts(apiData);
         setAllProducts(apiData);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -34,6 +36,6 @@ function useProducts() {
       setProducts(filterCategory);
     }
   };
-  return [products, handleSearch, filterByCategories];
+  return [products, handleSearch, filterByCategories, loading];
 }
 export default useProducts;

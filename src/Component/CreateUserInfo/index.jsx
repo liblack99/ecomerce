@@ -1,21 +1,24 @@
-import {Link} from "react-router-dom";
-import {useRef} from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useRef } from "react";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
+
 function CreateUserInfo() {
+  const { saveAccount, handleLogin, account } = useContext(ShoppingCartContext);
   const form = useRef(null);
-  //   const createAnAccount = () => {
-  //     const formData = new FormData(form.current);
-  //     const data = {
-  //       name: formData.get("name"),
-  //       email: formData.get("email"),
-  //       password: formData.get("password"),
-  //     };
-  //     // Create account
-  //     const stringifiedAccount = JSON.stringify(data);
-  //     localStorage.setItem("account", stringifiedAccount);
-  //     context.setAccount(data);
-  //     // Sign In
-  //     handleSignIn();
-  //   };
+  const isAccount = Object.keys(account).length === 0;
+  const createAnAccount = () => {
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    if (data.name !== "" && data.email !== "" && data.password !== "") {
+      saveAccount(data);
+      handleLogin(true);
+    }
+  };
   return (
     <form ref={form} className="flex flex-col gap-4 w-80">
       <div className="flex flex-col gap-1">
@@ -37,7 +40,7 @@ function CreateUserInfo() {
           Your email:
         </label>
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
           defaultValue=""
@@ -51,7 +54,7 @@ function CreateUserInfo() {
           Your password:
         </label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           defaultValue=""
@@ -60,11 +63,12 @@ function CreateUserInfo() {
               placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
         />
       </div>
-      <Link to="/">
-        <button className="bg-black text-white w-full rounded-lg py-3">
-          Create
-        </button>
-      </Link>
+      <button
+        className="bg-black text-white w-full rounded-lg py-3"
+        onClick={() => createAnAccount()}>
+        Create
+      </button>
+      {!isAccount && <Navigate replace to={"/"} />}
     </form>
   );
 }

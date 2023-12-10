@@ -1,11 +1,9 @@
-import {useContext, useState} from "react";
-import {ShoppingCartContext} from "../../Context";
 import Layout from "../../Component/Layout";
 import UserInfo from "../../Component/UserInfo";
 import EditUserInfo from "../../Component/EditUserInfo";
+import { useState } from "react";
 
 function MyAccount() {
-  //   const {} = useContext(ShoppingCartContext);
   const [view, setView] = useState("user-info");
 
   return (

@@ -1,39 +1,41 @@
-import {useContext} from "react";
-import {NavLink} from "react-router-dom";
-import {ShoppingCartContext} from "../../Context";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { ShoppingCartContext } from "../../Context";
 import ShoppingCart from "../ShoppingCart";
 
 const Navbar = () => {
   const activeStyle = "underline underline-offset-4";
-  const {filterByCategories} = useContext(ShoppingCartContext);
+  const { login, filterByCategories, handleLogin } =
+    useContext(ShoppingCartContext);
 
-  const isAccount = true;
   const renderView = () => {
-    if (isAccount) {
+    if (login) {
       return (
         <>
           <li className="text-black/60">"example"</li>
           <li>
             <NavLink
               to="/my-orders"
-              className={({isActive}) => (isActive ? activeStyle : undefined)}
-            >
+              className={({ isActive }) =>
+                isActive ? activeStyle : undefined
+              }>
               My Orders
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/my-account"
-              className={({isActive}) => (isActive ? activeStyle : undefined)}
-            >
+              className={({ isActive }) =>
+                isActive ? activeStyle : undefined
+              }>
               My Account
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/sign-in"
-              className={({isActive}) => (isActive ? activeStyle : undefined)}
-            >
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => handleLogin(false)}>
               Sign out
             </NavLink>
           </li>
@@ -44,8 +46,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to="/sign-in"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}>
             Sign in
           </NavLink>
         </li>
@@ -62,54 +63,48 @@ const Navbar = () => {
         <li>
           <NavLink
             to="/"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories()}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories()}>
             All
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/clothes"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories("clothe")}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories("clothe")}>
             Clothes
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/electronics"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories("electronics")}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories("electronics")}>
             Electronics
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/furnitures"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories("furnitures")}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories("furniture")}>
             Furnitures
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/toys"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories("toys")}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories("toys")}>
             Toys
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/others"
-            className={({isActive}) => (isActive ? activeStyle : undefined)}
-            onClick={() => filterByCategories("others")}
-          >
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => filterByCategories("miscellaneous")}>
             Others
           </NavLink>
         </li>
