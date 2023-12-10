@@ -1,4 +1,4 @@
-function Search({ handleSearch }) {
+function Search({handleSearch}) {
   return (
     <input
       type="text"

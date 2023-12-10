@@ -4,13 +4,10 @@ import useProducts from "../Hooks/useProducts";
 const ShoppingCartContext = createContext();
 
 function ShoppingCartProvider({children}) {
-  // My account
-  const [products, handleSearch] = useProducts();
-  const [account, setAccount] = useState({});
+  const [products, handleSearch, filterByCategories] = useProducts();
 
   // Product Detail · Show product
   const [productToShow, setProductToShow] = useState({});
-
   const showDetailProduct = (productDetail) => {
     openProductDetail();
     setProductToShow(productDetail);
@@ -70,7 +67,6 @@ function ShoppingCartProvider({children}) {
       totalProducts: cartProducts.length,
       totalPrice: totalPriceToCart(cartProducts),
     };
-
     setCount(0);
     setOrders([...orders, orderToAdd]);
     setCartProducts([]);
@@ -86,22 +82,13 @@ function ShoppingCartProvider({children}) {
   // Shopping Cart · Order
   const [orders, setOrders] = useState([]);
 
-  // Get products
-  const [items, setItems] = useState(null);
-  const [filteredItems, setFilteredItems] = useState(null);
-
-  // Get products by title
-  const [searchByTitle, setSearchByTitle] = useState(null);
-
-  // Get products by category
-  const [searchByCategory, setSearchByCategory] = useState(null);
-
   return (
     <ShoppingCartContext.Provider
       value={{
         count,
         products,
         handleSearch,
+        filterByCategories,
         productToShow,
         isProductDetailOpen,
         showDetailProduct,
@@ -118,16 +105,6 @@ function ShoppingCartProvider({children}) {
         increaseQuantity,
         decreaseQuantity,
         orders,
-
-        items,
-        setItems,
-        searchByTitle,
-        setSearchByTitle,
-        filteredItems,
-        searchByCategory,
-        setSearchByCategory,
-        account,
-        setAccount,
       }}
     >
       {children}

@@ -1,10 +1,10 @@
 /** @format */
 
-import { useContext } from "react";
+import {useContext} from "react";
 import CardProducts from "../../Component/CardProducts";
 import Layout from "../../Component/Layout";
 import Search from "../../Component/Search";
-import { ShoppingCartContext } from "../../Context";
+import {ShoppingCartContext} from "../../Context";
 import ProductDetail from "../../Component/ProductDetails";
 
 function Home() {
