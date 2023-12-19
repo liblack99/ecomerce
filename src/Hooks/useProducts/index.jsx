@@ -11,7 +11,7 @@ function useProducts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiData = await getData(text);
+        const apiData = await getData();
         setProducts(apiData);
         setAllProducts(apiData);
         setLoading(false);
@@ -20,10 +20,14 @@ function useProducts() {
       }
     };
     fetchData();
-  }, [text]);
+  }, []);
 
   const handleSearch = (inputTitle) => {
     setText(inputTitle);
+    const filterCategory = allProducts.filter((product) =>
+      product.title.toLowerCase().includes(inputTitle.toLowerCase())
+    );
+    setProducts(filterCategory);
   };
 
   const filterByCategories = (category) => {
@@ -34,8 +38,9 @@ function useProducts() {
         product.category.name.toLowerCase().includes(category.toLowerCase())
       );
       setProducts(filterCategory);
+      setText("");
     }
   };
-  return [products, handleSearch, filterByCategories, loading];
+  return { products, handleSearch, filterByCategories, loading, text };
 }
 export default useProducts;

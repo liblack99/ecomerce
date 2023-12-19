@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { json } from "react-router-dom";
 
 function useLocalStorage() {
   const getItemFromLocalStorage = (name, defaultValue) => {
     const localStorageItem = localStorage.getItem(name);
-    return localStorageItem ? JSON.parse(localStorageItem) : defaultValue;
+    return localStorageItem
+      ? JSON.parse(localStorageItem)
+      : localStorage.setItem(name, JSON.stringify(defaultValue));
   };
 
   const [account, setAccount] = useState(() =>
     getItemFromLocalStorage("account", {})
   );
+
   const [login, setLogin] = useState(() =>
     getItemFromLocalStorage("login", false)
   );

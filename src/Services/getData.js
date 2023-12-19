@@ -1,10 +1,8 @@
 const URl_API = "https://api.escuelajs.co/api/v1/products";
 
-async function getData(text = "") {
-  let query = text === "" ? "" : `/?title=${text}`;
-
+async function getData() {
   try {
-    const response = await fetch(`${URl_API}${query}`);
+    const response = await fetch(`${URl_API}`);
 
     if (response.ok) {
       const data = await response.json();

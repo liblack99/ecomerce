@@ -5,7 +5,8 @@ import useLocalStorage from "../Hooks/useLocalStorage";
 const ShoppingCartContext = createContext();
 
 function ShoppingCartProvider({ children }) {
-  const [products, handleSearch, filterByCategories, loading] = useProducts();
+  const { products, handleSearch, filterByCategories, loading, text } =
+    useProducts();
   const { account, saveAccount, login, handleLogin } = useLocalStorage();
   // Product Detail · Show product
   const [productToShow, setProductToShow] = useState({});
@@ -84,12 +85,13 @@ function ShoppingCartProvider({ children }) {
   const [orders, setOrders] = useState([]);
 
   const formatPassword = (password) => {
-    return "*".repeat(password.length);
+    return "*".repeat(password?.length);
   };
 
   return (
     <ShoppingCartContext.Provider
       value={{
+        text,
         count,
         products,
         handleSearch,

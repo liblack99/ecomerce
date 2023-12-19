@@ -16,7 +16,9 @@ function LogIn({ setView }) {
       </p>
       <p>
         <span className="font-light text-sm">Password: </span>
-        <span>{formatPassword(account.password)}</span>
+        <span>
+          {account.password ? formatPassword(account.password) : null}
+        </span>
       </p>
       <Link to="/">
         <button
