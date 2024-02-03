@@ -13,10 +13,6 @@ const Routes = () => {
 
   let routes = useRoutes([
     {
-      path: "/Ecomerce/",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
-    },
-    {
       path: "/",
       element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
     },

@@ -7,6 +7,7 @@ function CreateUserInfo() {
   const { saveAccount, handleLogin, account } = useContext(ShoppingCartContext);
   const form = useRef(null);
   const isAccount = Object.keys(account).length === 0;
+
   const createAnAccount = () => {
     const formData = new FormData(form.current);
     const data = {
