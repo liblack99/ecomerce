@@ -1,40 +1,60 @@
 import { useRoutes } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import Home from "../Pages/Home";
 import MyOrder from "../Pages/MyOrder";
 import MyOrders from "../Pages/MyOrders";
 import MyAccount from "../Pages/MyAccount";
 import SignIn from "../Pages/SingIn";
-import { useContext } from "react";
-import { ShoppingCartContext } from "../Context";
+import AuthRouter from "../AuthRouter";
 
 const Routes = () => {
-  const { login } = useContext(ShoppingCartContext);
-
   let routes = useRoutes([
     {
       path: "/",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     {
       path: "/clothes",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     {
       path: "/electronics",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     {
-      path: "/furnitures",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      path: "/furniture",
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     {
       path: "/toys",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     {
       path: "/others",
-      element: login ? <Home /> : <Navigate replace to={"/sign-in"} />,
+      element: (
+        <AuthRouter>
+          <Home />
+        </AuthRouter>
+      ),
     },
     { path: "/my-order/last", element: <MyOrder /> },
     { path: "/my-order/:id", element: <MyOrder /> },

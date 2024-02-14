@@ -1,5 +1,3 @@
-import React from "react";
-
 function NoFound() {
   return (
     <div className="w-[90%]">

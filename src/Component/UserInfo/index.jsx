@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 function UserInfo({ setView }) {
