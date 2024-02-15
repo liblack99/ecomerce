@@ -1,12 +1,11 @@
-import React from "react";
-import {useContext} from "react";
-import {ShoppingCartContext} from "../../Context";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
 import Layout from "../../Component/Layout";
 import OrderCard from "../../Component/OrderCard";
 
 function MyOrder() {
-  const {orders} = useContext(ShoppingCartContext);
-  const currentPath = window.location.pathname.split("/").slice(2).join();
+  const { orders } = useContext(ShoppingCartContext);
+  const currentPath = window.location.hash.split("/").slice(2).join();
   const indexOrder = orders.findIndex((order) => currentPath == order.id);
   let index;
   if (currentPath === "last") {
@@ -14,7 +13,7 @@ function MyOrder() {
   } else {
     index = indexOrder;
   }
-
+  console.log(currentPath);
   return (
     <Layout>
       <div className="flex items-center justify-center relative w-80 mb-6">

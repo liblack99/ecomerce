@@ -21,7 +21,10 @@ function CreateUserInfo() {
     }
   };
   return (
-    <form ref={form} className="flex flex-col gap-4 w-80">
+    <form
+      ref={form}
+      onSubmit={(event) => event.preventDefault()}
+      className="flex flex-col gap-4 w-80">
       <div className="flex flex-col gap-1">
         <label htmlFor="name" className="font-light text-sm">
           Your name:

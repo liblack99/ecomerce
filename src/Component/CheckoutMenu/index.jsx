@@ -16,7 +16,7 @@ function CheckoutMenu() {
   } = useContext(ShoppingCartContext);
 
   return (
-    <aside className="w-[460px] h-[calc(100vh-80px)] flex-col fixed z-10 right-0 border border-black rounded-lg bg-white overflow-y-scroll">
+    <aside className="w-[500px] h-[calc(100vh-80px)] flex-col fixed z-10 right-0 border border-black rounded-lg bg-white overflow-y-scroll">
       <div className="flex justify-between items-center p-6">
         <h2 className="font-medium text-xl ">My Order</h2>
         <div>
@@ -43,14 +43,14 @@ function CheckoutMenu() {
             ${totalPriceToCart(cartProducts)}
           </span>
         </p>
-        <Link to="/my-order/last">
-          <button
-            className="bg-black py-3 text-white w-[400px] rounded-lg fixed bottom-5 hover:scale-[1.01] "
-            onClick={() => clearCheckoutMenu()}>
-            Checkout
-          </button>
-        </Link>
       </div>
+      <Link to="/my-order/last" className="flex justify-center">
+        <button
+          className="bg-black py-3 text-white w-[400px] rounded-lg fixed bottom-5 hover:scale-[1.01] "
+          onClick={() => clearCheckoutMenu()}>
+          Checkout
+        </button>
+      </Link>
     </aside>
   );
 }

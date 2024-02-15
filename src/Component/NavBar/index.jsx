@@ -86,10 +86,10 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/furnitures"
+            to="/furniture"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             onClick={() => filterByCategories("furniture")}>
-            Furnitures
+            Furniture
           </NavLink>
         </li>
         <li>

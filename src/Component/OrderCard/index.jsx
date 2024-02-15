@@ -1,4 +1,4 @@
-import {XMarkIcon} from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function OrderCard({
   product,
@@ -16,7 +16,7 @@ function OrderCard({
             alt={product.title}
           />
         </figure>
-        <p className="text-sm font-light min-w-[160px]">{product.title}</p>
+        <p className="text-sm font-light min-w-[220px]">{product.title}</p>
       </div>
       {decreaseQuantity && increaseQuantity ? (
         <div className="flex w-[60px] ">
@@ -52,8 +52,7 @@ function OrderCard({
         {deleteProductsToCart && (
           <XMarkIcon
             className="h-6 w-6 text-black cursor-pointer"
-            onClick={() => deleteProductsToCart(product.id)}
-          ></XMarkIcon>
+            onClick={() => deleteProductsToCart(product.id)}></XMarkIcon>
         )}
       </div>
     </div>

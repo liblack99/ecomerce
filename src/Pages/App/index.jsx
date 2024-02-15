@@ -1,15 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ShoppingCartProvider } from "../../Context";
-import Routes from "../../Routes";
 import Navbar from "../../Component/NavBar";
+import AppRoutes from "../../Routes";
 
 function App() {
   return (
     <ShoppingCartProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar />
-        <Routes />
-      </BrowserRouter>
+        <AppRoutes />
+      </HashRouter>
     </ShoppingCartProvider>
   );
 }
