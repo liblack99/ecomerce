@@ -8,7 +8,7 @@ Puedes ver una demostración del proyecto [aquí](#) (https://liblack99.github.i
 
 ## Capturas de pantalla
 
-![home ecommerce](https://imgur.com/U3DnnkL)
+![home ecommerce](https://i.imgur.com/U3DnnkL.png)
 
 ## Características
 
