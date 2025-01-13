@@ -8,7 +8,7 @@ Puedes ver una demostración del proyecto [aquí](#) (https://liblack99.github.i
 
 ## Capturas de pantalla
 
-![home ecommerce](https://i.imgur.com/U3DnnkL.png)
+![home ecommerce](https://firebasestorage.googleapis.com/v0/b/pelagic-earth-407809.appspot.com/o/proyectos%2Fshopi.webp?alt=media&token=da348fbf-827f-40ff-9787-518f00ec210c)
 
 ## Características
 
